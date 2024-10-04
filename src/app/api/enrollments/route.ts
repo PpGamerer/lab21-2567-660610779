@@ -1,5 +1,5 @@
 import { checkToken } from "@lib/checkToken";
-import { Database, Payload } from "@lib/types";
+import { Payload } from "@lib/types";
 import { NextRequest, NextResponse } from "next/server";
 import { getPrisma } from "@lib/getPrisma";
 
@@ -113,14 +113,12 @@ export const POST = async (request: NextRequest) => {
   }
 
   //add course to database (enrollments collection)
-  if(course && !enrolled){
     await prisma.enrollment.create({
       data: {
         courseNo: courseNo,
         studentId: studentId,
       },
     })
-  }
   
   return NextResponse.json({
     ok: true,
